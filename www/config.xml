@@ -1,49 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.news.frontierstv" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" versionCode="1">
+<widget id="com.hezecom.newsfrontiers" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" versionCode="1">
     <name>News Frontiers TV</name>
     <description>
         Mobile Application for News Frontiers Television
     </description>
-    <author email="info@hezecom.com" href="http://hezecom.com/">
+    <author email="hezecom2@gmail.com" href="http://hezecom.com">
         Hezecom
     </author>
-    <content src="index.html"/>
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-    </platform>
-    <allow-navigation href="http://192.168.56.1:8100" />
+    <content src="index.html" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="AllowInlineMediaPlayback" value="true"/>
-    <preference name="MediaPlaybackRequiresUserAction" value="false"/>
-    <preference name="webviewbounce" value="false"/>
-    <preference name="UIWebViewBounce" value="false"/>
-    <preference name="DisallowOverscroll" value="true"/>
-    <preference name="SplashScreenDelay" value="3000"/>
-    <preference name="AutoHideSplashScreen" value="false"/>
-    <preference name="ShowSplashScreenSpinner" value="false"/>
-    <preference name="FadeSplashScreenDuration" value="0"/>
-    <preference name="android-minSdkVersion" value="14"/>
-    <preference name="BackupWebStorage" value="none"/>
-    <preference name="SplashScreen" value="screen"/>
-    <allow-navigation href="*youtube*"/>
-    <allow-navigation href="*ytimg*"/>
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
     <feature name="StatusBar">
-        <param name="ios-package" onload="true" value="CDVStatusBar"/>
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
-    <plugin name="cordova-plugin-battery-status" spec="~1.2.5" />
     <plugin name="cordova-plugin-camera" spec="~3.0.0" />
     <plugin name="cordova-plugin-console" spec="~1.1.0" />
     <plugin name="cordova-plugin-contacts" spec="~3.0.0" />
@@ -110,5 +86,19 @@
         <splash height="1024" platform="ios" src="res/screens/ios/Default-Portrait~ipad.png" width="768" />
         <splash height="960" platform="ios" src="res/screens/ios/Default@2x~iphone.png" width="640" />
         <splash height="480" platform="ios" src="res/screens/ios/Default~iphone.png" width="320" />
+    </platform>
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
     </platform>
 </widget>
