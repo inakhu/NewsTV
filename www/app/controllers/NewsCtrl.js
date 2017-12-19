@@ -66,7 +66,6 @@ app.controller('NewsDetails', function($scope, $stateParams , HTSServices,$ionic
         });
         $ionicLoading.hide();
     };*/
-
     $scope.storeBookmark = function (id) {
         $ionicLoading.show({template: 'Loading...'});
         HTSServices.HezecomGetOne('/blog/api/news/' + id+'/'+APP_SERVER.apikey).success(function (data) {

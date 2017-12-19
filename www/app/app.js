@@ -141,6 +141,16 @@ angular.module('HezecomApp',[
     },
     authStatus: false
   })
+  .state('app.stream', {
+    url: '/stream',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/templates/others/stream.html',
+        controller: 'DefaultCtrl'
+      }
+    },
+    authStatus: false
+  })
   .state('app.aboutus', {
     url: '/aboutus',
     views: {
