@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.hezecom.newsfrontiers" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" versionCode="1">
-    <name>News Frontiers TV</name>
+    <name>NFTV</name>
     <description>
-        Mobile Application for News Frontiers Television
+        Mobile Application for New Frontiers Television
     </description>
     <author email="hezecom2@gmail.com" href="http://hezecom.com">
         Hezecom
