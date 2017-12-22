@@ -121,6 +121,16 @@ angular.module('HezecomApp',[
     },
     authStatus: false
   })
+  .state('app.iwitnessupdate', {
+    url: '/iwitness/add/update',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/templates/iwitness/Update.html',
+        controller: 'iWitnessCtrl'
+      }
+    },
+    authStatus: false
+  })
   .state('app.events', {
     url: '/events',
     views: {
@@ -151,6 +161,16 @@ angular.module('HezecomApp',[
     },
     authStatus: false
   })
+  .state('app.advert', {
+    url: '/advert/:id',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/templates/others/tvshows.html',
+        controller: 'NewsDetails'
+      }
+    },
+    authStatus: false
+  })
   .state('app.aboutus', {
     url: '/aboutus',
     views: {
@@ -171,18 +191,18 @@ angular.module('HezecomApp',[
     },
     authStatus: false
   })
- /* .state('app.UserUpload', {
-    url: '/profile/upload/:id',
+  .state('app.uploader', {
+    url: '/iwitness/upload/new',
     views: {
       'menuContent': {
-        templateUrl: 'app/templates/users/Upload.html',
-        controller: 'UeserDetails'
+        templateUrl: 'app/templates/iwitness/Upload.html',
+        controller: 'UploaderCtrl'
       }
     },
     authStatus: true
-  })*/
+  })
 
-      .state('app.settings', {
+  .state('app.settings', {
         url: '/settings',
         views: {
           'menuContent': {
@@ -191,6 +211,6 @@ angular.module('HezecomApp',[
           }
         },
         authStatus: false
-      });
+  });
   $urlRouterProvider.otherwise('/app/dashboard');
 });

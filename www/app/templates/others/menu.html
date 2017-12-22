@@ -1,7 +1,7 @@
 <ion-side-menus expose-aside-when="large">
 
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-assertive">
+    <ion-nav-bar class="bar-balanced">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
@@ -17,19 +17,22 @@
   <ion-side-menu side="left">
     <ion-content class="custom">
       <ion-list>
-        <ion-item class="heading-item item item-avatar header-bg" nav-clear menu-close ui-sref="app.profile">
-          <h2 class="greeting" style="color: white">Top Stories</h2>
+
+        <ion-item class="bar-balanced">
+          <p><img class="user-image" ng-src="app/assets/images/logo.png" spinner-on-load></p>
         </ion-item>
+
+        <!--<ion-item class="" nav-clear menu-close ui-sref="app.profile">
+          <h2 class="greeting">Top Stories</h2>
+        </ion-item>-->
 
         <ion-item  nav-clear menu-close ui-sref="app.dashboard">
-          <h2 class="menu-text">Recent News</h2>
+          <h2 class="menu-text">Top Stories</h2>
         </ion-item>
-
         <ion-item ng-repeat="cat in categories" nav-clear menu-close href="#/app/news/category/{{cat.catid}}">
           <h2 class="menu-text">{{cat.cat_name}}</h2>
         </ion-item>
-
-        <ion-item class="item-divider" style="background-color: #e42112; color: white;">
+        <ion-item class="item-divider balanced-bg">
           <h2 class="menu-text center" style="color: white;">Others</h2>
         </ion-item>
         <ion-item class="" nav-clear menu-close ui-sref="app.iwitness">
@@ -50,11 +53,9 @@
         <ion-item class="" nav-clear menu-close ui-sref="app.aboutus">
           <h2 class="menu-text">About Us</h2>
         </ion-item>
-
         <ion-item nav-clear menu-close ui-sref="app.settings">
           <h2 class="menu-text">Settings</h2>
         </ion-item>
-
 
       </ion-list>
     </ion-content>

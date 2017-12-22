@@ -22,6 +22,7 @@ app.controller('DashCtrl', function($scope ,$state, HTSServices, $ionicFilterBar
             $scope.news = data.data;
             $scope.totalItems = data.count;
             $scope.featured = data.featured;
+            $scope.advert = data.Advert;
             $ionicLoading.hide();
         });
 
@@ -47,6 +48,7 @@ app.controller('NewsDetails', function($scope, $stateParams , HTSServices,$ionic
         $ionicLoading.show({template: 'Loading...'});
         HTSServices.HezecomGetOne('/news/api/news/' + id+'/'+APP_SERVER.apikey).success(function (data) {
             $scope.row = data.data;
+            $scope.advert = data.Advert;
         });
         $ionicLoading.hide();
     };
@@ -110,6 +112,7 @@ app.controller('CategoriesCtrl', function($scope ,$state, HTSServices, $ionicFil
             $scope.totalItems = data.count;
             $scope.featured = data.featured;
             $scope.CategoryLabel = data.CategoryLabel;
+            $scope.advert = data.Advert;
             $ionicLoading.hide();
         });
     };

@@ -1,5 +1,5 @@
 
-app.controller('iWitnessCtrl', function($scope, $stateParams , HTSServices,APP_SERVER,$cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet,$ionicLoading,$state) {
+app.controller('iWitnessCtrl', function($scope,$localStorage, $stateParams , HTSServices,APP_SERVER,$cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet,$ionicLoading,$state) {
 
     //view
     $scope.surl=APP_SERVER.url+'templates/uploads/main/';
@@ -9,6 +9,7 @@ app.controller('iWitnessCtrl', function($scope, $stateParams , HTSServices,APP_S
             $scope.news = data.data;
             $scope.totalItems = data.count;
             $scope.featured = data.featured;
+            $scope.advert = data.Advert;
             $ionicLoading.hide();
         });
     };
@@ -24,6 +25,7 @@ app.controller('iWitnessCtrl', function($scope, $stateParams , HTSServices,APP_S
     $scope.data.post_type='iwitness';
     $scope.data.post_status='Draft';
     $scope.data.post_image='video.jpg';
+    $scope.data.filename=$localStorage.filename;
 
     $scope.iWitnessForm = function () {
         HTSServices.HezecomPostNewInfo('iwitness/api/add/'+APP_SERVER.apikey, $scope.data)
@@ -46,7 +48,6 @@ app.controller('iWitnessCtrl', function($scope, $stateParams , HTSServices,APP_S
 
 app.controller('iWitnessDetails', function($scope, $stateParams , HTSServices,VideoControl,$ionicLoading,$cordovaSocialSharing,StorageService,APP_SERVER) {
     var id = $stateParams.id;
-
     $scope.row = {};
     $scope.mainurl=APP_SERVER.url;
     $scope.surl=APP_SERVER.url+'templates/uploads/main/';
@@ -59,6 +60,7 @@ app.controller('iWitnessDetails', function($scope, $stateParams , HTSServices,Vi
         HTSServices.HezecomGetOne('/iwitness/api/' + id+'/'+APP_SERVER.apikey).success(function (data) {
             $scope.row = data.data;
             $scope.vlink = data.vlink;
+            $scope.advert = data.Advert;
         });
         $ionicLoading.hide();
     };

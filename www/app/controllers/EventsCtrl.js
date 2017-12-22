@@ -9,6 +9,7 @@ app.controller('EventsCtrl', function($scope, $stateParams , HTSServices,APP_SER
             $scope.news = data.data;
             $scope.totalItems = data.count;
             $scope.featured = data.featured;
+            $scope.advert = data.Advert;
             $ionicLoading.hide();
         });
     };
@@ -36,6 +37,7 @@ app.controller('EventsDetails', function($scope, $stateParams , HTSServices,Vide
         HTSServices.HezecomGetOne('/iwitness/api/' + id+'/'+APP_SERVER.apikey).success(function (data) {
             $scope.row = data.data;
             $scope.vlink = data.vlink;
+            $scope.advert = data.Advert;
         });
         $ionicLoading.hide();
     };

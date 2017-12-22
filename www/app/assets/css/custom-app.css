@@ -16,8 +16,6 @@ img {
 #menuLinks .list .item{ border-color:#479CF7;}
 #menuLinks .list .item a{ background:#387EF5; color:#fff;}
 
-
-
 .custom {
     background-color: rgba(73,186,236,0.04) !important;
 }
@@ -47,8 +45,8 @@ img {
 .header-bg{
     background:#e42112 !important;
 }
-.bar-balanced{
-    background-color:#08729B;
+.bar-balanced, .button-balanced, .balanced-bg{
+    background-color:#08729B !important;
     color: white;
 }
 /*round*/
