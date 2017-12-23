@@ -1,7 +1,10 @@
-<ion-view cache-view="false" view-title="iWitness" name="iwitnessp-view">
-    <ion-pane  style="background-color: #FFFFFF">
+<div ng-controller="UploadCtrl">
+    <ion-view view-title="Uploader">
+        <ion-header-bar class="bar-positive">
+            <h1 class="title">Image Upload</h1>
+        </ion-header-bar>
         <ion-content>
-            <img ng-src="{{pathForImage(image)}}" style="width: 100%; height: 100%;">
+            <img ng-src="{{pathForImage(image)}}" style="width:80%; height:80%;">
         </ion-content>
         <ion-footer-bar class="bar bar-positive">
             <div class="button-bar">
@@ -9,5 +12,5 @@
                 <button class="button icon-left ion-upload" ng-click="uploadImage()" ng-disabled="image === null">Upload</button>
             </div>
         </ion-footer-bar>
-    </ion-pane>
-</ion-view>
+    </ion-view>
+</div>

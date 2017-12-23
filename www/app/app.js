@@ -196,7 +196,7 @@ angular.module('HezecomApp',[
     views: {
       'menuContent': {
         templateUrl: 'app/templates/iwitness/Upload.html',
-        controller: 'UploaderCtrl'
+        controller: 'UploadCtrl'
       }
     },
     authStatus: true
