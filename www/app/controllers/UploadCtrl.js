@@ -177,4 +177,63 @@ app.controller('UploadCtrl', function($scope,$state,$ionicPopup, $stateParams , 
     };
 
 
+
+
+
+   /* function onLoad() {
+        document.addEventListener("deviceready",onDeviceReady,false);
+    }*/
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+    function uploadFile(mediaFile,method) {
+        var ft = new FileTransfer(),
+            path = mediaFile,
+            name = "video.3gp";
+        var options = new FileUploadOptions();
+        options.chunkedMode = false;
+        options.fileKey = "file";
+        options.fileName = name;
+        options.mimeType = "video/mpeg";
+        ft.upload(path,
+            APP_SERVER.url+"iwitness/api/upload/"+APP_SERVER.apikey,
+            function(r) {
+                alert('Success ' + r.response);
+            },
+            function(error) {
+                alert('Error ' + path + ': ' + error.code);
+            },
+            options);
+    }
+    function onPhotoURISuccess(imageURI) {
+        uploadFile(imageURI,"library");
+    }
+    function getVideo(source, type) {
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality:
+            50, destinationType: destinationType.FILE_URI, sourceType: source,
+            mediaType: type});
+    }
+    function onFail(message) {
+        alert('Error');
+    }
+
+    /*VIDEO UPLOAD*/
+    /*$scope.upload = function() {
+        var options = {
+            fileKey: "avatar",
+            fileName: "filename.mp4",
+            chunkedMode: false,
+            mimeType: "video/mp4"
+        };
+        var server = APP_SERVER.url+"iwitness/api/upload/"+APP_SERVER.apikey,
+
+        $cordovaFileTransfer.upload("http://www.samplewebsite.com/upload", "file:/storage/....mp4", options).then(function(result) {
+            console.log("SUCCESS: " + JSON.stringify(result.response));
+        }, function(err) {
+            console.log("ERROR: " + JSON.stringify(err));
+        }, function (progress) {
+        });
+    }*/
+
 });
