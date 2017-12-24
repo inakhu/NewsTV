@@ -87,7 +87,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
     $scope.uploadImage = function() {
         // Destination URL
         // var url = "http://localhost:8888/upload.php";
-        var url = AppBase+"iwitness/api/upload/"+APP_SERVER.apikey;
+        var url = 'http://nftvapp.com/upload.php';
         //var url = "https://devdactic.com/downloads/upload.php";
 
         // File for Upload
@@ -138,7 +138,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
             var image = document.getElementById('tempImage');
             image.src = imageData;
 
-            var server = APP_SERVER.url+"iwitness/api/upload/"+APP_SERVER.apikey,
+            var server = 'http://nftvapp.com/upload.php',
                 filePath = imageData;
 
             var date = new Date();
@@ -147,7 +147,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
                 fileKey: "file",
                 fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
                 chunkedMode: false,
-                mimeType: "video/mpeg"
+                mimeType: "video/mp4"
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
