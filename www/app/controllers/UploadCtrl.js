@@ -235,5 +235,112 @@ app.controller('UploadCtrl', function($scope,$state,$ionicPopup, $stateParams , 
         }, function (progress) {
         });
     }*/
+    function uploadVideo() {
+    document.addEventListener('deviceready', function () {
+        var fileURL = sessionStorage.getItem('lastVideoUploaded');
+            var alertPopup = $ionicPopup.alert({
+                title: 'Video about to upload!',
+                template: fileURL
+            });
+        var fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+        if(fileURL.substring(0, 4) == "http") {
+            fileURL = encodeURI(fileURL);
+        }
+        sessionStorage.setItem('profilePhoto', fileName);
+
+        function win(r) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Video Uploaded!',
+                template: "Don't worry, you can always change it! Now save your profile!"
+            });
+            $state.go('app.iwitnessupdate');
+        }
+
+        function fail(error) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Errore!',
+                template: JSON.stringify(error)
+            });
+        }
+
+        var uri = encodeURI("http://yourpage.php");
+
+        var params = {};
+        params.comesFrom = "challenge";
+        params.user = $scope.data.userCompleto;
+        var options = new FileUploadOptions();
+        options.fileKey = "fileToSave";
+        options.fileName = fileName;
+        options.chunkedMode = false;
+        options.headers = {
+            Connection: "close"
+        };
+        options.mimeType = "video/mpeg"; //retrieve the correct mime type
+        options.params = params;
+
+
+        var ft = new FileTransfer();
+        ft.onprogress = function(progressEvent) {
+            if (progressEvent.lengthComputable) {
+              loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+            } else {
+              loadingStatus.increment();
+            }
+        };
+        ft.upload(fileURL, uri, win, fail, options);
+    }, false);
+}
+
+
+
+
+
+
+//another
+    function getNewVideo() {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(uploadPhoto, function(message) {
+                alert('get picture failed');
+            },{
+                quality: 50,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                mediaType:navigator.camera.MediaType.VIDEO
+            }
+        );
+
+    }
+
+    function uploadPhoto(imageURI) {
+        var options = new FileUploadOptions();
+        options.fileKey="file";
+        options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+        options.mimeType = "video/mpeg";
+        options.mimeType = "video/mp4";
+
+        var params = new Object();
+        params.value1 = "test";
+        params.value2 = "param";
+
+        options.params = params;
+        options.chunkedMode = false;
+
+        var ft = new FileTransfer();
+        ft.upload(imageURI, "http://demo.makitweb.com/phonegap_camera/upload.php", win, fail, options);
+    }
+
+    function win(r) {
+        console.log("Code = " + r.responseCode);
+        console.log("Response = " + r.response);
+        console.log("Sent = " + r.bytesSent);
+        alert(r.response);
+    }
+
+    /*function fail(error) {
+        alert("An error has occurred: Code = " = error.code);
+    }*/
+
+
+
 
 });
