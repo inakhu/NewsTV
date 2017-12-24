@@ -119,12 +119,63 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
         });
     };
 
+
+
+    /*Video Uplaod*/
+
+    $scope.openVideoLibrary = function() {
+        var options = {
+            quality: 50,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+            mediaType:navigator.camera.MediaType.VIDEO
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+
+            //console.log(imageData);
+            //console.log(options);
+            var image = document.getElementById('tempImage');
+            image.src = imageData;
+
+            var server = APP_SERVER.url+"iwitness/api/upload/"+APP_SERVER.apikey,
+                filePath = imageData;
+
+            var date = new Date();
+
+            var options = {
+                fileKey: "file",
+                fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
+                chunkedMode: false,
+                mimeType: "video/mpeg"
+            };
+
+            $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
+                console.log("SUCCESS: " + JSON.stringify(result.response));
+                console.log('Result_' + result.response[0] + '_ending');
+                alert("success");
+                alert(JSON.stringify(result.response));
+
+            }, function(err) {
+                console.log("ERROR: " + JSON.stringify(err));
+                //alert(JSON.stringify(err));
+            }, function (progress) {
+                // constant progress updates
+            });
+
+
+        }, function(err) {
+            // error
+            console.log(err);
+        });
+    };
+
 });
 
 
 
 
-app.controller('UploadCtrl', function($scope,$state,$ionicPopup, $stateParams , HTSServices,$cordovaCamera,$cordovaFile,APP_SERVER,$cordovaActionSheet,$cordovaDevice,$cordovaFileTransfer) {
+app.controller('UploadCtrl', function($rootScope, $scope, $cordovaCamera, $cordovaFileTransfer,APP_SERVER) {
     /*file/image upload*/
     $scope.openPhotoLibrary = function() {
         var options = {
