@@ -1,18 +1,13 @@
-<div ng-controller="UploadCtrl">
-    <ion-view view-title="Uploader">
-        <ion-header-bar class="bar-positive">
-            <h1 class="title">Image Upload</h1>
-        </ion-header-bar>
+<ion-view cache-view="false" view-title="iWitness" name="iwitnessp-view">
+    <ion-pane  style="background-color: #FFFFFF">
         <ion-content>
-            <img ng-src="{{pathForImage(image)}}" style="width:80%; height:80%;">
+            <img ng-src="{{pathForImage(image)}}" style="width: 100%; height: 100%;">
         </ion-content>
         <ion-footer-bar class="bar bar-positive">
             <div class="button-bar">
-                <button class="button icon-left ion-camera" ng-click="openPhotoLibrary()">Take Photo</button>
-                <button class="button icon-left ion-camera" onclick="getNewVideo();">Take Video</button>
-
-                <!--<button class="button icon-left ion-upload" ng-click="uploadImage()" ng-disabled="image === null">Upload</button>-->
+                <button class="button icon-left ion-camera" ng-click="loadImage()">Take Photo</button>
+                <button class="button icon-left ion-upload" ng-click="uploadImage()" ng-disabled="image === null">Upload</button>
             </div>
         </ion-footer-bar>
-    </ion-view>
-</div>
+    </ion-pane>
+</ion-view>
