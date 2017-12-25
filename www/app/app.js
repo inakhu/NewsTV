@@ -199,9 +199,18 @@ angular.module('HezecomApp',[
         controller: 'UploaderCtrl'
       }
     },
-    authStatus: true
+    authStatus: false
   })
-
+  .state('app.videouploader', {
+    url: '/iwitness/upload/video/new',
+    views: {
+      'menuContent': {
+        templateUrl: 'app/templates/iwitness/Upload2.html',
+        controller: 'VideoUploaderCtrl'
+      }
+    },
+    authStatus: false
+  })
   .state('app.settings', {
         url: '/settings',
         views: {
