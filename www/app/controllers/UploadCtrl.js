@@ -1,4 +1,4 @@
-app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet,APP_SERVER) {
+app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading, $cordovaActionSheet,APP_SERVER) {
     $scope.image = null;
     var AppBase = APP_SERVER.url;
     // Present Actionsheet for switch beteen Camera / Library
