@@ -85,7 +85,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
     };
 
     $scope.uploadImage = function() {
-        $ionicLoading.show({template: 'Uploading Video ...'});
+        $ionicLoading.show({template: 'uploading image ...'});
         // Destination URL
         // var url = "http://localhost:8888/upload.php";
         var url = 'http://nftvapp.com/upload.php';
@@ -140,7 +140,7 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
             if (btnIndex === 1) {
                 type = Camera.PictureSourceType.PHOTOLIBRARY;
             } else if (btnIndex === 2) {
-                type = Camera.PictureSourceType.CAMERA;
+                type = Camera.PictureSourceType.VIDEO;
             }
             if (type !== null) {
                 $scope.selectPicture(type);
@@ -212,7 +212,7 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
     };
 
     $scope.uploadImage = function() {
-        $ionicLoading.show({template: 'Processing ...'});
+        $ionicLoading.show({template: 'uploading video ...'});
         // Destination URL
         // var url = "http://localhost:8888/upload.php";
         var url = 'http://nftvapp.com/upload.php';
