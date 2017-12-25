@@ -85,6 +85,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
     };
 
     $scope.uploadImage = function() {
+        $ionicLoading.show({template: 'Processing ...'});
         // Destination URL
         // var url = "http://localhost:8888/upload.php";
         var url = 'http://nftvapp.com/upload.php';
@@ -109,6 +110,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
             console.log($localStorage.filename);
             $state.go('app.iwitnessupdate');
             $scope.showAlert('Success', 'Image upload finished.');
+            $ionicLoading.hide();
         });
     };
 
@@ -124,7 +126,20 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
     /*Video Uplaod*/
 
     $scope.openVideoLibrary = function() {
-        var options = {
+
+       /* if (navigator.camera) {
+            var options = {
+                quality: 50,
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                mediaType:navigator.camera.MediaType.VIDEO
+            };
+        } else {
+            $scope.image.src = "http://nftvapp.com/templates/uploads/main/video.jpg";
+            console.log('default image was set');
+        }*/
+
+       var options = {
             quality: 50,
             destinationType: navigator.camera.DestinationType.FILE_URI,
             sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
@@ -132,11 +147,12 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-
+            $ionicLoading.show({template: 'Processing ...'});
             //console.log(imageData);
             //console.log(options);
-            var image = document.getElementById('tempImage');
-            image.src = imageData;
+            //var image = document.getElementById('tempVideo');
+            //image.src = imageData;
+            //image.src = 'http://nftvapp.com/templates/uploads/main/video.jpg';
 
             var server = 'http://nftvapp.com/upload.php',
                 filePath = imageData;
@@ -151,8 +167,8 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-                console.log("SUCCESS: " + JSON.stringify(result.response));
-                console.log('Result_' + result.response[0] + '_ending');
+                //console.log("SUCCESS: " + JSON.stringify(result.response));
+                //console.log('Result_' + result.response[0] + '_ending');
                 alert("success");
                 alert(JSON.stringify(result.response));
 
@@ -163,7 +179,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
                 // constant progress updates
             });
 
-
+            $ionicLoading.hide();
         }, function(err) {
             // error
             console.log(err);
@@ -361,37 +377,5 @@ app.controller('UploadCtrl', function($rootScope, $scope, $cordovaCamera, $cordo
         );
 
     }
-
-    function uploadPhoto(imageURI) {
-        var options = new FileUploadOptions();
-        options.fileKey="file";
-        options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-        options.mimeType = "video/mpeg";
-        options.mimeType = "video/mp4";
-
-        var params = new Object();
-        params.value1 = "test";
-        params.value2 = "param";
-
-        options.params = params;
-        options.chunkedMode = false;
-
-        var ft = new FileTransfer();
-        ft.upload(imageURI, "http://demo.makitweb.com/phonegap_camera/upload.php", win, fail, options);
-    }
-
-    function win(r) {
-        console.log("Code = " + r.responseCode);
-        console.log("Response = " + r.response);
-        console.log("Sent = " + r.bytesSent);
-        alert(r.response);
-    }
-
-    /*function fail(error) {
-        alert("An error has occurred: Code = " = error.code);
-    }*/
-
-
-
 
 });
