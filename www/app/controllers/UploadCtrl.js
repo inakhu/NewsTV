@@ -125,7 +125,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
 });
 
 
-app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading, $cordovaActionSheet,APP_SERVER) {
+app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading) {
 
     $scope.openVideoLibrary = function() {
         var options = {
@@ -134,9 +134,10 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
             sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
             mediaType:navigator.camera.MediaType.VIDEO
         };
-        $ionicLoading.show({template: 'Processing ...'});
+
         $cordovaCamera.getPicture(options).then(function(imageData) {
 
+            $ionicLoading.show({template: 'uploading video ...'});
             //console.log(imageData);
             //console.log(options);
             //var image = document.getElementById('tempVideo');
@@ -148,7 +149,6 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
                 filePath = cordova.file.externalRootDirectory + imageData;
 
             var date = new Date();
-
             var options = {
                 fileKey: "file",
                 fileName: imageData.substr(imageData.lastIndexOf('/') + 1),
@@ -157,10 +157,8 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
             };
 
             $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-                //console.log("SUCCESS: " + JSON.stringify(result.response));
-                //console.log('Result_' + result.response[0] + '_ending');
-                alert("success");
-                alert(JSON.stringify(result.response));
+                $state.go('app.iwitnessupdate');
+                $scope.showAlert('Success', 'Image upload finished.');
                 $ionicLoading.hide();
 
             }, function(err) {

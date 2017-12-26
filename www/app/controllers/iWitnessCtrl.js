@@ -24,8 +24,8 @@ app.controller('iWitnessCtrl', function($scope,$localStorage, $stateParams , HTS
     $scope.data = {};
     $scope.data.post_type='iwitness';
     $scope.data.post_status='Draft';
-    $scope.data.post_image='video.jpg';
-    $scope.data.filename=$localStorage.filename;
+    /*$scope.data.post_image='video.jpg';*/
+    $scope.data.post_image=$localStorage.filename;
 
     $scope.iWitnessForm = function () {
         HTSServices.HezecomPostNewInfo('iwitness/api/add/'+APP_SERVER.apikey, $scope.data)

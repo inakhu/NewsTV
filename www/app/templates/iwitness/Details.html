@@ -8,6 +8,10 @@
             <ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="PullRefresher(row.post_id)">
             </ion-refresher>
 
+            <div class="col no-padding" style="margin: -20px 0; padding:0;">
+                <img class="full-image" src="{{surl}}{{row.post_image}}">
+            </div>
+
                 <div class="card">
                     <h4 class="padding">{{row.post_title}}</h4>
                     <div class="video-container">
