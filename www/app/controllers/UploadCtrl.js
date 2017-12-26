@@ -96,6 +96,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
 
         // File name only
         var filename = $scope.image;
+        $localStorage.filename =  filename;
 
         var options = {
             fileKey: "file",
@@ -106,8 +107,8 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
         };
 
         $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-            $localStorage.filename =  filename;
-            console.log($localStorage.filename);
+            //$localStorage.filename =  filename;
+            //console.log($localStorage.filename);
             $state.go('app.iwitnessupdate');
             $scope.showAlert('Success', 'Image upload finished.');
             $ionicLoading.hide();
@@ -127,7 +128,6 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
 app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading, $cordovaActionSheet,APP_SERVER) {
 
     $scope.openVideoLibrary = function() {
-
         var options = {
             quality: 50,
             destinationType: navigator.camera.DestinationType.FILE_URI,
@@ -156,11 +156,12 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
                 mimeType: "video/mp4"
             };
 
-            $cordovaFileTransfer.upload(server, filePath, options,true).then(function(result) {
+            $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
                 //console.log("SUCCESS: " + JSON.stringify(result.response));
                 //console.log('Result_' + result.response[0] + '_ending');
                 alert("success");
                 alert(JSON.stringify(result.response));
+                $ionicLoading.hide();
 
             }, function(err) {
                 console.log("ERROR: " + JSON.stringify(err));
@@ -169,12 +170,65 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
                 // constant progress updates
             });
 
-            $ionicLoading.hide();
         }, function(err) {
             // error
             console.log(err);
         });
     };
 
+
+
+
+
+    $scope.captureVideo = function () {
+        var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URL,
+            sourceType: Camera.PictureSourceType.CAMERA
+        };
+        $cordovaCapture.captureVideo(options).then(function(videoData) {
+            $scope.clip = videoData[0].fullPath;
+            $scope.file=videoData[0].name;
+
+            var first=$scope.clip.substr(0,$scope.clip.lastIndexOf('/')+1);
+
+            $cordovaFile.readAsDataURL(first,$scope.file)
+                .then(function (success) {
+
+                    var bucket = new AWS.S3({params: { Bucket: 'jbf-dev-bucket' }});
+
+                    var params = {
+
+                        Key: videoData[0].name,
+                        ContentEncoding: 'base64',
+                        ContentType: 'video/mp4',
+                        Body: success
+                    };
+
+                    bucket.upload(params).on('httpUploadProgress', function(evt) {
+                        $scope.uploading = true;
+                        $scope.progress = parseInt((evt.loaded * 100) / evt.total)+'%';
+                        console.log("Uploaded :: " + $scope.progress );
+                        $scope.$apply();
+                    }).send(function(err, data) {
+                        $scope.uploading = false;
+                        /*$scope.images.push(data.Location);*/
+
+                        /*console.log(data.Location);*/
+                        $scope.$apply();
+                    });
+
+                    $scope.i++;
+
+                }, function (error) {
+
+                    console.log("==========error==========");
+                    console.log(error);
+                })
+
+
+        })
+
+    }
 
 });
