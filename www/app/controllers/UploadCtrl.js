@@ -145,8 +145,9 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
             //image.src = 'http://nftvapp.com/templates/uploads/main/video.jpg';
 
             var server = 'http://nftvapp.com/upload.php',
-                //filePath = imageData;
-                filePath = cordova.file.externalRootDirectory + imageData;
+                filePath = imageData;
+                //filePath = cordova.file.externalRootDirectory + imageData;
+            $localStorage.filename =  imageData;
 
             var date = new Date();
             var options = {
