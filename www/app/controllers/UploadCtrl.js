@@ -88,7 +88,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
         $ionicLoading.show({template: 'uploading image ...'});
         // Destination URL
         // var url = "http://localhost:8888/upload.php";
-        var url = 'http://nftvapp.com/upload.php';
+        var url = 'http://nftvapp.com/upload.php?apikey='+APP_SERVER.apikey;
         //var url = "https://devdactic.com/downloads/upload.php";
 
         // File for Upload
@@ -125,7 +125,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
 });
 
 
-app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading) {
+app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup,$ionicLoading,APP_SERVER) {
 
     $scope.openVideoLibrary = function() {
         var options = {
@@ -138,13 +138,10 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
         $cordovaCamera.getPicture(options).then(function(imageData) {
 
             $ionicLoading.show({template: 'uploading video ...'});
-            //console.log(imageData);
-            //console.log(options);
             //var image = document.getElementById('tempVideo');
             //image.src = imageData;
             //image.src = 'http://nftvapp.com/templates/uploads/main/video.jpg';
-
-            var server = 'http://nftvapp.com/upload.php',
+            var server = 'http://nftvapp.com/upload.php?apikey='+APP_SERVER.apikey,
                 filePath = imageData;
                 //filePath = cordova.file.externalRootDirectory + imageData;
             $localStorage.filename =  imageData;
@@ -175,6 +172,12 @@ app.controller('VideoUploaderCtrl', function ($scope,$state,$localStorage, $cord
         });
     };
 
+    $scope.showAlert = function(title, msg) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: msg
+        });
+    };
 
 
 

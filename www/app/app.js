@@ -47,9 +47,15 @@ angular.module('HezecomApp',[
   });
 })
 
-.config(function ($sceDelegateProvider) {
-    $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
-})
+  .config(function ($sceDelegateProvider) {
+      $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http?):\/\/(w{3}.)?nftvapp\.com/.+$')]);
+  })
+
+ .filter('validUrl', function ($sce) {
+    return function(url) {
+      return $sce.trustAsResourceUrl(url);
+    };
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

@@ -24,10 +24,12 @@ app.controller('iWitnessCtrl', function($scope,$localStorage, $stateParams , HTS
     $scope.data = {};
     $scope.data.post_type='iwitness';
     $scope.data.post_status='Draft';
-    /*$scope.data.post_image='video.jpg';*/
+    //$scope.data.post_image='video.jpg';
     $scope.data.post_image=$localStorage.filename;
 
+    //for youtube
     $scope.iWitnessForm = function () {
+        $ionicLoading.show({template: 'processing...'});
         HTSServices.HezecomPostNewInfo('iwitness/api/add/'+APP_SERVER.apikey, $scope.data)
             .success(function (data) {
                 if (data.errors) {
@@ -35,15 +37,19 @@ app.controller('iWitnessCtrl', function($scope,$localStorage, $stateParams , HTS
                         title: 'Information',
                         template: data.errors
                     });
+                    $ionicLoading.hide();
                 } else {
                     $ionicPopup.alert({
                         title: 'Success Message:',
                         template: data.message
                     });
+                    $localStorage.filename='';
                     $state.go('app.iwitness');
+                    $ionicLoading.hide();
                 }
             });
     };
+
 });
 
 app.controller('iWitnessDetails', function($scope, $stateParams , HTSServices,VideoControl,$ionicLoading,$cordovaSocialSharing,StorageService,APP_SERVER) {
@@ -55,11 +61,15 @@ app.controller('iWitnessDetails', function($scope, $stateParams , HTSServices,Vi
     $scope.size = 16;
     $scope.fontSize = "font-size-"+$scope.size;
 
+
     $scope.DetailsLoader = function(id) {
         $ionicLoading.show({template: 'Loading...'});
         HTSServices.HezecomGetOne('/iwitness/api/' + id+'/'+APP_SERVER.apikey).success(function (data) {
             $scope.row = data.data;
             $scope.vlink = data.vlink;
+            $scope.fileSource = data.fileLink;
+            $scope.fileExt = data.fileExt;
+            $scope.main_message = data.main_message;
             $scope.advert = data.Advert;
         });
         $ionicLoading.hide();

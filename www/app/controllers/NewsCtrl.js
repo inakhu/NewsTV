@@ -49,6 +49,7 @@ app.controller('NewsDetails', function($scope, $stateParams , HTSServices,$ionic
         HTSServices.HezecomGetOne('/news/api/news/' + id+'/'+APP_SERVER.apikey).success(function (data) {
             $scope.row = data.data;
             $scope.advert = data.Advert;
+            $scope.main_message = data.main_message;
         });
         $ionicLoading.hide();
     };

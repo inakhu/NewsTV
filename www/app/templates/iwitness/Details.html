@@ -1,4 +1,4 @@
-<ion-view cache-view="false" view-title="iWitness View" name="dashboard-view">
+<ion-view cache-view="false" view-title="iWitness View" name="dashboard-details">
 
     <ion-pane  style="background-color: #FFFFFF">
 
@@ -9,20 +9,23 @@
             </ion-refresher>
 
             <div class="col no-padding" style="margin: -20px 0; padding:0;">
-                <img class="full-image" src="{{surl}}{{row.post_image}}">
+                <img class="full-image" src="{{surl}}{{row.witness_file}}">
             </div>
 
                 <div class="card">
                     <h4 class="padding">{{row.post_title}}</h4>
-                    <div class="video-container">
-                        <iframe src="{{vlink}}" frameborder="0" width="560" height="315" allowfullscreen></iframe>
+                    <div ng-if="vlink" class="video-container">
+                        <iframe src="{{vlink|validUrl}}" frameborder="0" width="100%" height="315" allowfullscreen></iframe>
                     </div>
+                    <video ng-if="fileExt=='mp4'" controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer" width="100%" height="315">
+                        <source src="{{fileSource|validUrl}}" type="video/mp4">
+                    </video>
                     <div class="item item-text-wrap">
                         <p ng-if="row.post_date"><a href="#" class="subdued" style="font-size: 12px;"> <i class="icon ion-clock"></i> {{row.post_date|timeAgo}}</a></p>
                         <p ng-bind-html="row.post_description" ng-class="fontSize"></p>
                     </div>
-                    <!--<video controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="https://player.vimeo.com/external/76336826.sd.mp4?s=dd361715fad172bf26ba0ad91635c4f9" type="video/mp4"/></video>-->
                 </div>
+
 
             <section>
                 <div class="col padding-bottom">
