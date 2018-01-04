@@ -39,7 +39,7 @@ app.controller('UploaderCtrl', function ($scope,$state,$localStorage, $cordovaCa
                 //Create a new name for the photo
                 var d = new Date(),
                     n = d.getTime(),
-                    newFileName =  n + ".jpg";
+                    newFileName =  "iwitness_"+n + ".jpg";
 
                 // If you are trying to load image from the gallery on Android we need special treatment!
                 if ($cordovaDevice.getPlatform() == 'Android' && sourceType === Camera.PictureSourceType.PHOTOLIBRARY) {

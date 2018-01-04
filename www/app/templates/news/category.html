@@ -28,7 +28,7 @@
                 </a>
             </div>
         </ion-content>
-        <ion-footer-bar class="bar bar-balanced">
+        <ion-footer-bar class="bar bar-balanced" ng-if="advert.post_title">
             <div class="col text-center">
                 <a class="light" style="font-size: 16px;" href="#/app/advert/{{advert.post_id}}">
                     <p>{{advert.post_title}}</p>
